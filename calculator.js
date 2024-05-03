@@ -33,6 +33,7 @@ function operate(operator, firstNum, secondNum) {
         return divide(firstNum, secondNum);
     }
 }
+//Display handling
 const display = document.querySelector(".display");
 let displayContent = [];
 function displayPopulate(symbol) {
@@ -40,4 +41,13 @@ function displayPopulate(symbol) {
     displayContent = displayContent.join("");
     display.textContent = displayContent;
     displayContent = displayContent.split("");
+}
+const numberInput = document.querySelectorAll(".numbers");
+numberInput.forEach(number => {
+    number.addEventListener('click', (symbolSupplier))
+});
+function symbolSupplier(event) {
+    const symbolsToSend = event.target.textContent;
+    //const stringed = symbolsToSend.toUpperCase();
+    displayPopulate(symbolsToSend);
 }
