@@ -15,3 +15,21 @@ function multiply(num1, num2) {
 function divide(num1, num2) {
     return num1 / num2;
 }
+//Operation function
+function operate(operator, firstNum, secondNum) {
+    if (!operator || !firstNum || !secondNum) {
+        return "ERROR";
+    }
+    if (operator == "+") {
+        return add(firstNum, secondNum);
+    }
+    if (operator == "-") {
+        return subtract(firstNum, secondNum);
+    }
+    if (operator == "*") {
+        return multiply(firstNum, secondNum);
+    }
+    if (operator == "/") {
+        return divide(firstNum, secondNum);
+    }
+}
