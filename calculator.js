@@ -33,3 +33,11 @@ function operate(operator, firstNum, secondNum) {
         return divide(firstNum, secondNum);
     }
 }
+const display = document.querySelector(".display");
+let displayContent = [];
+function displayPopulate(symbol) {
+    displayContent.push(symbol);
+    displayContent = displayContent.join("");
+    display.textContent = displayContent;
+    displayContent = displayContent.split("");
+}
