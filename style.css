@@ -13,13 +13,15 @@
     justify-content: space-around;
     height: 400px;
     width: 300px;
-    font-family: 'Digital-7';
+    border: solid 2px;
+    padding: 8px;
 }
 .display {
     text-align: right;
     font-size: 36px;
     background-color: rgba(14, 63, 14, 0.829);
     padding: 8px;
+    font-family: 'Digital-7';
 }
 .buttons {
     display: flex;
