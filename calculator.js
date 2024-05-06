@@ -42,12 +42,44 @@ function displayPopulate(symbol) {
     display.textContent = displayContent;
     displayContent = displayContent.split("");
 }
-const numberInput = document.querySelectorAll(".numbers");
-numberInput.forEach(number => {
+//Number buttons
+const numberButtons = document.querySelectorAll(".numbers");
+numberButtons.forEach(number => {
     number.addEventListener('click', (symbolSupplier))
 });
 function symbolSupplier(event) {
     const symbolsToSend = event.target.textContent;
     //const stringed = symbolsToSend.toUpperCase();
     displayPopulate(symbolsToSend);
+}
+//Operator buttons
+const operatorButtons = document.querySelectorAll(".operators");
+operatorButtons.forEach(operator => {
+    operator.addEventListener('click', (operatorHandler))
+});
+let operatorChosen = null;
+let firstAndOpLength = null;
+function operatorHandler(event) {
+    firstNum = parseInt(displayContent.join("")); //Save current input number
+    console.log(firstNum + " firstnum");
+    displayPopulate(event.target.textContent);
+    operatorChosen = event.target.textContent; //Saves operator type
+    firstAndOpLength = displayContent.length; //Counts length of the first number and the operator
+    console.log(firstAndOpLength + " firstAndOpLength");
+}
+//Equals button
+const equalsButton = document.querySelector(".equals");
+equalsButton.addEventListener('click', (equalsHandler));
+let equalsIsPressed = false;
+function equalsHandler() {
+    secondNum = parseInt(displayContent.slice(firstAndOpLength).join(""));
+    console.log(secondNum + " secondNum");
+    equalsIsPressed = true;
+    result = operate(operatorChosen, firstNum, secondNum);
+    console.log(result);
+    display.textContent = result.toString(); //Show result
+    //Reset values
+    firstNum = null;
+    secondNum = null;
+    displayContent = [];
 }
