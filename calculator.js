@@ -83,3 +83,12 @@ function equalsHandler() {
     secondNum = null;
     displayContent = [];
 }
+//All Clear button
+const clearButton = document.querySelector(".clear");
+clearButton.addEventListener('click', (allClear));
+function allClear() {
+    firstNum = null;
+    secondNum = null;
+    displayContent = [];
+    display.textContent = "0";
+}
