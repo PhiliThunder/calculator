@@ -35,12 +35,12 @@ function operate(operator, firstNum, secondNum) {
 }
 //Display handling
 const display = document.querySelector(".display");
-let displayContent = [];
+let inputArray = [];
 function displayPopulate(symbol) {
-    displayContent.push(symbol);
-    displayContent = displayContent.join("");
-    display.textContent = displayContent;
-    displayContent = displayContent.split("");
+    inputArray.push(symbol);
+    inputArray = inputArray.join("");
+    display.textContent = inputArray;
+    inputArray = inputArray.split("");
 }
 //Number buttons
 const numberButtons = document.querySelectorAll(".numbers");
@@ -49,7 +49,6 @@ numberButtons.forEach(number => {
 });
 function symbolSupplier(event) {
     const symbolsToSend = event.target.textContent;
-    //const stringed = symbolsToSend.toUpperCase();
     displayPopulate(symbolsToSend);
 }
 //Operator buttons
@@ -59,29 +58,48 @@ operatorButtons.forEach(operator => {
 });
 let operatorChosen = null;
 let firstAndOpLength = null;
+let subsequentOperation = false;
 function operatorHandler(event) {
-    firstNum = parseInt(displayContent.join("")); //Save current input number
+    if (operatorChosen != null) {
+        operatorChosen = event.target.textContent; //Saves operator type
+        console.log(operatorChosen);
+        displayPopulate(event.target.textContent);
+        intermediateEquals();
+        subsequentOperation = true;
+    } else {
+    firstNum = parseInt(inputArray.join("")); //Save current input number
     console.log(firstNum + " firstnum");
     displayPopulate(event.target.textContent);
     operatorChosen = event.target.textContent; //Saves operator type
-    firstAndOpLength = displayContent.length; //Counts length of the first number and the operator
+    console.log(operatorChosen);
+    firstAndOpLength = inputArray.length; //Counts length of the first number and the operator
     console.log(firstAndOpLength + " firstAndOpLength");
+    }
 }
 //Equals button
 const equalsButton = document.querySelector(".equals");
-equalsButton.addEventListener('click', (equalsHandler));
-let equalsIsPressed = false;
-function equalsHandler() {
-    secondNum = parseInt(displayContent.slice(firstAndOpLength).join(""));
+equalsButton.addEventListener('click', (equals));
+function equals() {
+    secondNum = parseFloat(inputArray.slice(firstAndOpLength).join(""));
     console.log(secondNum + " secondNum");
-    equalsIsPressed = true;
+    console.log(operatorChosen);
     result = operate(operatorChosen, firstNum, secondNum);
-    console.log(result);
+    console.log(result + " result");
     display.textContent = result.toString(); //Show result
     //Reset values
-    firstNum = null;
+    firstNum = result;
     secondNum = null;
-    displayContent = [];
+    inputArray = [firstNum];
+}
+//Function for calculation when clicking operator after another operator but before equals button
+function intermediateEquals() {
+    secondNum = parseFloat(inputArray);
+    console.log(secondNum + " secondNum");
+    console.log(operatorChosen);
+    result = operate(operatorChosen, firstNum, secondNum);
+    console.log(result + " intermediate result");
+    firstNum = result;
+    console.log(firstNum + " new firstnum");
 }
 //All Clear button
 const clearButton = document.querySelector(".clear");
@@ -89,6 +107,8 @@ clearButton.addEventListener('click', (allClear));
 function allClear() {
     firstNum = null;
     secondNum = null;
-    displayContent = [];
+    inputArray = [];
     display.textContent = "0";
+    operatorChosen = null;
+    subsequentOperation = false;
 }
