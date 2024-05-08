@@ -33,24 +33,51 @@ function operate(operator, firstNum, secondNum) {
         return divide(firstNum, secondNum);
     }
 }
+let inputValues = [];
+function clearInputValues() {
+    inputValues = [];
+}
 //Display handling
 const display = document.querySelector(".display");
-let inputArray = [];
 function displayPopulate(symbol) {
-    inputArray.push(symbol);
-    inputArray = inputArray.join("");
-    display.textContent = inputArray;
-    inputArray = inputArray.split("");
+    inputValues.push(symbol);
+    inputValues = inputValues.join("");
+    display.textContent = inputValues;
+    inputValues = inputValues.split("");
+}
+function displayResult(result) {
+    result = result.toString();
+    display.textContent = result;
+}
+function clearDisplay() {
+    display.textContent = "";
 }
 //Number buttons
 const numberButtons = document.querySelectorAll(".numbers");
 numberButtons.forEach(number => {
-    number.addEventListener('click', (symbolSupplier))
+    number.addEventListener('click', (numberHandler))
 });
-function symbolSupplier(event) {
-    const symbolsToSend = event.target.textContent;
-    displayPopulate(symbolsToSend);
+function numberHandler(event) {
+    const numbersToSend = event.target.textContent;
+    displayPopulate(numbersToSend);
 }
+/*When an operator is pressed the first time:
+- Number in inputValues should be saved as firstNum
+- Operatortype should be saved
+- Operator should be pushed to display
+- inputValues should be reset
+- Ability to press operator should be deactivated, as long as there are no numbers in inputValues
+When an operator is pressed a second or subsequent time:
+- Number in inputValues should be saved as secondNum
+- Operation should be done on the two numbers, using the previously saved operator choice, save to Result value
+- Display should update to result
+- Number from Result should be set to as firstNum
+- inputValues should be reset
+- Ability to press operator should be deactivated, as long as there are no numbers in inputValues
+- 
+*/
+
+/*OLD METHOD:
 //Operator buttons
 const operatorButtons = document.querySelectorAll(".operators");
 operatorButtons.forEach(operator => {
@@ -67,12 +94,12 @@ function operatorHandler(event) {
         intermediateEquals();
         subsequentOperation = true;
     } else {
-    firstNum = parseInt(inputArray.join("")); //Save current input number
+    firstNum = parseInt(inputValues.join("")); //Save current input number
     console.log(firstNum + " firstnum");
     displayPopulate(event.target.textContent);
     operatorChosen = event.target.textContent; //Saves operator type
     console.log(operatorChosen);
-    firstAndOpLength = inputArray.length; //Counts length of the first number and the operator
+    firstAndOpLength = inputValues.length; //Counts length of the first number and the operator
     console.log(firstAndOpLength + " firstAndOpLength");
     }
 }
@@ -80,7 +107,7 @@ function operatorHandler(event) {
 const equalsButton = document.querySelector(".equals");
 equalsButton.addEventListener('click', (equals));
 function equals() {
-    secondNum = parseFloat(inputArray.slice(firstAndOpLength).join(""));
+    secondNum = parseFloat(inputValues.slice(firstAndOpLength).join(""));
     console.log(secondNum + " secondNum");
     console.log(operatorChosen);
     result = operate(operatorChosen, firstNum, secondNum);
@@ -89,11 +116,11 @@ function equals() {
     //Reset values
     firstNum = result;
     secondNum = null;
-    inputArray = [firstNum];
+    inputValues = [firstNum];
 }
 //Function for calculation when clicking operator after another operator but before equals button
 function intermediateEquals() {
-    secondNum = parseFloat(inputArray);
+    secondNum = parseFloat(inputValues);
     console.log(secondNum + " secondNum");
     console.log(operatorChosen);
     result = operate(operatorChosen, firstNum, secondNum);
@@ -101,14 +128,16 @@ function intermediateEquals() {
     firstNum = result;
     console.log(firstNum + " new firstnum");
 }
+
 //All Clear button
 const clearButton = document.querySelector(".clear");
 clearButton.addEventListener('click', (allClear));
 function allClear() {
     firstNum = null;
     secondNum = null;
-    inputArray = [];
+    inputValues = [];
     display.textContent = "0";
     operatorChosen = null;
     subsequentOperation = false;
 }
+*/
