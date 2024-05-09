@@ -1,0 +1,29 @@
+When an operator is pressed the first time:
+- Number in inputValues should be saved as firstNum, if empty do nothing
+- Operatortype should be saved
+- Operator should be pushed to display
+- inputValues should be reset
+- Ability to press operator should be deactivated, as long as there are no numbers in inputValues
+When an operator is pressed a second or subsequent time:
+- Number in inputValues should be saved as secondNum, if empty do nothing
+- Operation should be done on the two numbers, using the previously saved operator choice, save to Result value
+- Display should update to result
+- Number from Result should be set to firstNum
+- secondNum should be set to null
+- inputValues should be reset
+- Ability to press operator should be deactivated, as long as there are no numbers in inputValues
+When equals is pressed/ran:
+- If no secondNum and no numbers in inputValues
+    - Set firstNum to result and displayResult
+    - Reset inputValues
+- Else if no secondNum but numbers in inputValues
+    - Set secondNum to number from inputValues
+    - Run operate and set to result
+    - Display result
+    - Set result to firstNum
+    - Reset inputValues
+- Else
+    - Run operate and set to result
+    - Display result
+    - Set result to firstNum
+    - Reset inputValues
