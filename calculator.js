@@ -84,24 +84,12 @@ function operationHandler(event) {
         clearInputValues();
     }
 }
-//All Clear button
-const clearButton = document.querySelector(".clear");
-clearButton.addEventListener('click', (allClear));
-function allClear() {
-    firstNum = null;
-    secondNum = null;
-    clearInputValues();
-    clearDisplay();
-    operator = null;
-    firstOperation = true;
-    result = 0;
-}
 //Equals button and function
 const equalsButton = document.querySelector(".equals");
 equalsButton.addEventListener('click', (equals));
 function equals() {
     if (secondNum == null && firstNum == null) {
-        
+
     } else if(secondNum == null) {
         secondNum = Number(inputValues);
         result = operate(operator, firstNum, secondNum);
@@ -115,67 +103,15 @@ function equals() {
         clearInputValues();
     }
 }
-/*OLD METHOD:
-//Operator buttons
-const operatorButtons = document.querySelectorAll(".operators");
-operatorButtons.forEach(operator => {
-    operator.addEventListener('click', (operatorHandler))
-});
-let operatorChosen = null;
-let firstAndOpLength = null;
-let subsequentOperation = false;
-function operatorHandler(event) {
-    if (operatorChosen != null) {
-        operatorChosen = event.target.textContent; //Saves operator type
-        console.log(operatorChosen);
-        displayPopulate(event.target.textContent);
-        intermediateEquals();
-        subsequentOperation = true;
-    } else {
-    firstNum = parseInt(inputValues.join("")); //Save current input number
-    console.log(firstNum + " firstnum");
-    displayPopulate(event.target.textContent);
-    operatorChosen = event.target.textContent; //Saves operator type
-    console.log(operatorChosen);
-    firstAndOpLength = inputValues.length; //Counts length of the first number and the operator
-    console.log(firstAndOpLength + " firstAndOpLength");
-    }
-}
-//Equals button
-const equalsButton = document.querySelector(".equals");
-equalsButton.addEventListener('click', (equals));
-function equals() {
-    secondNum = parseFloat(inputValues.slice(firstAndOpLength).join(""));
-    console.log(secondNum + " secondNum");
-    console.log(operatorChosen);
-    result = operate(operatorChosen, firstNum, secondNum);
-    console.log(result + " result");
-    display.textContent = result.toString(); //Show result
-    //Reset values
-    firstNum = result;
-    secondNum = null;
-    inputValues = [firstNum];
-}
-//Function for calculation when clicking operator after another operator but before equals button
-function intermediateEquals() {
-    secondNum = parseFloat(inputValues);
-    console.log(secondNum + " secondNum");
-    console.log(operatorChosen);
-    result = operate(operatorChosen, firstNum, secondNum);
-    console.log(result + " intermediate result");
-    firstNum = result;
-    console.log(firstNum + " new firstnum");
-}
-
-//All Clear button
+//All Clear button and function
 const clearButton = document.querySelector(".clear");
 clearButton.addEventListener('click', (allClear));
 function allClear() {
     firstNum = null;
     secondNum = null;
-    inputValues = [];
-    display.textContent = "0";
-    operatorChosen = null;
-    subsequentOperation = false;
+    clearInputValues();
+    clearDisplay();
+    operator = null;
+    firstOperation = true;
+    result = 0;
 }
-*/
