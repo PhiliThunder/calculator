@@ -1,7 +1,3 @@
-//Operation variables
-let firstNum = null;
-let secondNum = null;
-let operator = null;
 //Basic math functions
 function add(num1, num2) {
     return num1 + num2;
@@ -33,24 +29,22 @@ function operate(operator, firstNum, secondNum) {
         return divide(firstNum, secondNum);
     }
 }
-let inputValues = [];
+let inputValues = "";
 function clearInputValues() {
-    inputValues = [];
+    inputValues = "";
 }
 //Display handling
 const display = document.querySelector(".display");
 function displayPopulate(symbol) {
-    inputValues.push(symbol);
-    inputValues = inputValues.join("");
+    inputValues += symbol;
     display.textContent = inputValues;
-    inputValues = inputValues.split("");
 }
-function displayResult(result) {
-    result = result.toString();
+function displayResult() {
+    result.toString();
     display.textContent = result;
 }
 function clearDisplay() {
-    display.textContent = "";
+    display.textContent = "0";
 }
 //Number buttons
 const numberButtons = document.querySelectorAll(".numbers");
@@ -61,22 +55,66 @@ function numberHandler(event) {
     const numbersToSend = event.target.textContent;
     displayPopulate(numbersToSend);
 }
-/*When an operator is pressed the first time:
-- Number in inputValues should be saved as firstNum
-- Operatortype should be saved
-- Operator should be pushed to display
-- inputValues should be reset
-- Ability to press operator should be deactivated, as long as there are no numbers in inputValues
-When an operator is pressed a second or subsequent time:
-- Number in inputValues should be saved as secondNum
-- Operation should be done on the two numbers, using the previously saved operator choice, save to Result value
-- Display should update to result
-- Number from Result should be set to as firstNum
-- inputValues should be reset
-- Ability to press operator should be deactivated, as long as there are no numbers in inputValues
-- 
-*/
+//Operation variables
+let firstNum = null;
+let secondNum = null;
+let operator = null;
+let firstOperation = true;
+let operatorsActive = true;
 
+let result = 0;
+//Operator buttons and function
+const operatorButtons = document.querySelectorAll(".operators");
+operatorButtons.forEach(operator => {
+    operator.addEventListener('click', (operationHandler))
+});
+function operationHandler(event) {
+    if (firstOperation == true && inputValues.length > 0) {
+        firstNum = Number(inputValues);
+        operator = event.target.textContent;
+        displayPopulate(operator);
+        clearInputValues();
+        firstOperation = false;
+    } else if (inputValues.length > 0) {
+        secondNum = Number(inputValues);
+        result = operate(operator, firstNum, secondNum);
+        displayResult();
+        firstNum = result;
+        secondNum = null;
+        clearInputValues();
+    }
+}
+//All Clear button
+const clearButton = document.querySelector(".clear");
+clearButton.addEventListener('click', (allClear));
+function allClear() {
+    firstNum = null;
+    secondNum = null;
+    clearInputValues();
+    clearDisplay();
+    operator = null;
+    firstOperation = true;
+    result = 0;
+}
+//Equals button and function
+const equalsButton = document.querySelector(".equals");
+equalsButton.addEventListener('click', (equals));
+function equals() {
+    if (secondNum == null && firstNum == null) {
+        
+    } else if(secondNum == null) {
+        secondNum = Number(inputValues);
+        result = operate(operator, firstNum, secondNum);
+        displayResult();
+        result = firstNum;
+        clearInputValues();
+    } else {
+        result = operate(operator, firstNum, secondNum);
+        displayResult();
+        result = firstNum;
+        clearInputValues();
+    }
+}
 /*OLD METHOD:
 //Operator buttons
 const operatorButtons = document.querySelectorAll(".operators");
