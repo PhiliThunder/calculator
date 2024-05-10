@@ -36,8 +36,21 @@ function clearInputValues() {
 //Display handling
 const display = document.querySelector(".display");
 function displayPopulate(symbol) {
-    inputValues += symbol;
-    display.textContent = inputValues;
+    const lastCharacter = display.textContent.slice(-1);
+    console.log("lastChar: " + lastCharacter)
+    console.log("isNaN: " + isNaN(symbol) + symbol);
+    if (lastCharacter === '+' && isNaN(symbol) || //Makes sure multiple operators cannot be displayed on screen after eachother
+        lastCharacter === '-' && isNaN(symbol) || 
+        lastCharacter === '*' && isNaN(symbol) || 
+        lastCharacter === '/' && isNaN(symbol)) {
+        display.textContent = display.textContent.slice(0, -1) + symbol;
+        removedSymbol = lastCharacter;
+    } else {
+        if (display.textContent === "0") {//Removes the default 0 before adding new symbols
+            display.textContent = "";
+        }
+        display.textContent += symbol;
+    }
 }
 function displayResult() {
     result.toString();
@@ -52,17 +65,27 @@ numberButtons.forEach(number => {
     number.addEventListener('click', (numberHandler))
 });
 function numberHandler(event) {
-    const numbersToSend = event.target.textContent;
-    displayPopulate(numbersToSend);
+    if (display.textContent == result) { 
+        allClear(); //Clears all if result has been shown and no new operator was pressed
+    }
+    const numberToSend = event.target.textContent;
+    inputValues += numberToSend;
+    displayPopulate(numberToSend);
 }
 //Operation variables
 let firstNum = null;
 let secondNum = null;
 let operator = null;
 let firstOperation = true;
-let operatorsActive = true;
-
 let result = 0;
+function debugLogAll() {
+    console.log("inputVals: " + inputValues)
+    console.log("firstN " + firstNum);
+    console.log("secN " + secondNum);
+    console.log("operator " + operator);
+    console.log("firstOp? " + firstOperation);
+    console.log("result: " + result);
+}
 //Operator buttons and function
 const operatorButtons = document.querySelectorAll(".operators");
 operatorButtons.forEach(operator => {
@@ -82,6 +105,11 @@ function operationHandler(event) {
         firstNum = result;
         secondNum = null;
         clearInputValues();
+        operator = event.target.textContent;
+        displayPopulate(operator);
+    } else {
+        operator = event.target.textContent;
+        displayPopulate(operator);
     }
 }
 //Equals button and function
@@ -94,12 +122,12 @@ function equals() {
         secondNum = Number(inputValues);
         result = operate(operator, firstNum, secondNum);
         displayResult();
-        result = firstNum;
+        firstNum = result;
         clearInputValues();
     } else {
         result = operate(operator, firstNum, secondNum);
         displayResult();
-        result = firstNum;
+        firstNum = result;
         clearInputValues();
     }
 }
