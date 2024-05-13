@@ -123,11 +123,13 @@ function equals() {
         result = operate(operator, firstNum, secondNum);
         displayResult();
         firstNum = result;
+        secondNum = null;
         clearInputValues();
     } else {
         result = operate(operator, firstNum, secondNum);
         displayResult();
         firstNum = result;
+        secondNum = null;
         clearInputValues();
     }
 }
