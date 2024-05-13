@@ -53,8 +53,11 @@ function displayPopulate(symbol) {
     }
 }
 function displayResult() {
-    result.toString();
-    display.textContent = result;
+    let resultRounded = result;
+    if (result.toString().length > 16) { //Simple decimal limiter, works fine in most cases to prevent overflow
+        resultRounded = Math.round(result * 1e12) / 1e12;
+    } 
+    display.textContent = resultRounded.toString();
 }
 function clearDisplay() {
     display.textContent = "0";
@@ -125,7 +128,7 @@ function equals() {
         firstNum = result;
         secondNum = null;
         clearInputValues();
-    } else {
+    } else { //in case secondNum is already set, but it should never be. So maybe unnecessary? 
         result = operate(operator, firstNum, secondNum);
         displayResult();
         firstNum = result;
