@@ -13,8 +13,11 @@ function divide(num1, num2) {
 }
 //Operation function
 function operate(operator, firstNum, secondNum) {
-    if (!operator || !firstNum || !secondNum) {
+    if (!operator || firstNum === null || secondNum === null) {
         return "ERROR";
+    }
+    if (operator === "/" && secondNum === 0) {
+        return ":P WILLNOTDO ;D";
     }
     if (operator == "+") {
         return add(firstNum, secondNum);
