@@ -119,7 +119,7 @@ function operationHandler(event) {
     }
 }
 //Equals button and function
-const equalsButton = document.querySelector(".equals");
+const equalsButton = document.querySelector("#equals");
 equalsButton.addEventListener('click', (equals));
 function equals() {
     if (secondNum == null && firstNum == null) {
@@ -140,7 +140,7 @@ function equals() {
     }
 }
 //All Clear button and function
-const clearButton = document.querySelector(".clear");
+const clearButton = document.querySelector("#clear");
 clearButton.addEventListener('click', (allClear));
 function allClear() {
     firstNum = null;
