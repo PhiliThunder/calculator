@@ -13,8 +13,11 @@
     justify-content: space-around;
     height: 400px;
     width: 300px;
-    border: solid 2px;
+    border: solid 4px #241712;
+    border-radius: 15px;
     padding: 8px;
+    background-color: #B1B2B4;
+    box-shadow: 2px 2px 4px 2px;
 }
 .display {
     text-align: right;
@@ -23,6 +26,8 @@
     padding: 8px;
     font-family: 'Digital-7';
     overflow: hidden;
+    border: 3px solid black;
+    border-radius: 1px;
 }
 .buttons {
     display: flex;
@@ -44,4 +49,35 @@ button {
     padding: 8px;
     font-size: 36px;
     flex-grow: 1;
+    color: #f8f7ee;
+    border: 3px solid black;
+    border-radius: 3px;
+}
+.right-buttons button {
+    background-color: #665c50;
+}
+.numbers {
+    background-color: #221c16;
+}
+#clear {
+    background-color: #e37924;
+}
+/*I want to modify these hover values with custom properties and lab() lightness later*/
+.right-buttons button:hover {
+    background-color: #221c16;
+}
+.numbers:hover {
+    background-color: #665c50;
+}
+#clear:hover {
+    background-color: #965017;
+}
+.right-buttons button:active {
+    background-color: black;
+}
+.numbers:active {
+    background-color: #221c16;
+}
+#clear:active {
+    background-color: #49270b;
 }
