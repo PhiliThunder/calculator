@@ -2,6 +2,17 @@
     font-family: 'Digital-7';
     src: url('resources/digital-font/digital-7.ttf') format('truetype');
 }  
+:root {
+    --primary-color: #665c50;
+    --secondary-color: #221c16;
+    --accent-color: #e37924;
+    --aluminium-color: #B1B2B4;
+    --dark-alu-color: #191a1a;
+    --light-color: #f8f7ee;
+}
+body {
+    background-color: var(--primary-color);
+}
 .container {
     display: flex;
     margin: 0 auto;
@@ -13,20 +24,20 @@
     justify-content: space-around;
     height: 400px;
     width: 300px;
-    border: solid 4px #241712;
+    border: solid 4px var(--dark-alu-color);
     border-radius: 15px;
     padding: 8px;
-    background-color: #B1B2B4;
+    background-color: var(--aluminium-color);
     box-shadow: 2px 2px 4px 2px;
 }
 .display {
     text-align: right;
     font-size: 36px;
-    background-color: rgba(14, 63, 14, 0.829);
+    background-color: #1A4D2E;
     padding: 8px;
     font-family: 'Digital-7';
     overflow: hidden;
-    border: 3px solid black;
+    border: 3px solid var(--dark-alu-color);
     border-radius: 1px;
 }
 .buttons {
@@ -49,25 +60,24 @@ button {
     padding: 8px;
     font-size: 36px;
     flex-grow: 1;
-    color: #f8f7ee;
+    color: var(--light-color);
     border: 3px solid black;
     border-radius: 3px;
 }
 .right-buttons button {
-    background-color: #665c50;
+    background-color: var(--primary-color);
 }
 .numbers {
-    background-color: #221c16;
+    background-color: var(--secondary-color);
 }
 #clear {
-    background-color: #e37924;
+    background-color: var(--accent-color);
 }
-/*I want to modify these hover values with custom properties and lab() lightness later*/
 .right-buttons button:hover {
-    background-color: #221c16;
+    background-color: var(--secondary-color);
 }
 .numbers:hover {
-    background-color: #665c50;
+    background-color: var(--primary-color);
 }
 #clear:hover {
     background-color: #965017;
@@ -76,7 +86,7 @@ button {
     background-color: black;
 }
 .numbers:active {
-    background-color: #221c16;
+    background-color: var(--secondary-color);
 }
 #clear:active {
     background-color: #49270b;
